@@ -1,22 +1,24 @@
 <template>
-  <div v-if="readingSessions.length > 0">
+  <div>
     <h1 class="display-1">Registerede timer</h1>
 
-    <v-card v-for="(item, index) in readingSessions" :key="item.date" class="my-5">
-      <v-card-title>
-        {{index + 1}}. læsning - {{item.reading.date | check}}
-        <v-spacer />
-        <v-btn fab x-small @click="removeItem(item.date)">
-          <v-icon>mdi-trash-can-outline</v-icon>
-        </v-btn>
-      </v-card-title>
-      <v-card-text>
-        {{item.reading.hours}} timer och {{item.reading.minutes}} minuter
-        <span
-          v-if="item.reading.book"
-        >läst i {{item.reading.book}}</span>
-      </v-card-text>
-    </v-card>
+    <template v-if="readingSessions.length > 0">
+      <v-card v-for="(item, index) in readingSessions" :key="item.date" class="my-5">
+        <v-card-title>
+          {{index + 1}}. læsning - {{item.reading.date | check}}
+          <v-spacer />
+          <v-btn fab x-small @click="removeItem(item.date)">
+            <v-icon>mdi-trash-can-outline</v-icon>
+          </v-btn>
+        </v-card-title>
+        <v-card-text>
+          {{item.reading.hours}} timer och {{item.reading.minutes}} minuter
+          <span
+            v-if="item.reading.book"
+          >läst i {{item.reading.book}}</span>
+        </v-card-text>
+      </v-card>
+    </template>
 
     <v-dialog v-model="dialog" max-width="600">
       <template v-slot:activator="{ on }">
